@@ -13,11 +13,11 @@ class User extends React.Component {
                 <input type="text" />
                 <button>Search</button>
                 <div>
-                    <img/>
-                    <h2>Name</h2>
-                    <h4>Total Followers</h4>
+                    <img src={this.props.img}/>
+                    <h2>{this.props.name}</h2>
+                    <h4>Total Followers: {this.props.totalFollowers}</h4>
                 </div>
-                <FollowerList />
+                <FollowerList followers={this.props.followers} />
             </div>
         )
     }

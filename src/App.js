@@ -48,7 +48,10 @@ class App extends React.Component {
   render() {
     console.log('render');
     return(<div>
-      <User />
+      <User img={this.state.userInfo.photo} 
+            name={this.state.user} 
+            totalFollowers={this.state.userInfo.totalFollowers}
+            followers={this.state.followers} />
     </div>);
   }
 }
