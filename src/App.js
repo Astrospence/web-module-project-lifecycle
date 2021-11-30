@@ -9,7 +9,7 @@ class App extends React.Component {
       user: '',
       userInfo: {
         photo: '',
-        username: 'Astrospence',
+        username: '',
         totalFollowers: ''
       },
       followers: []
@@ -33,8 +33,12 @@ class App extends React.Component {
     .catch(err => {
       console.log(err)
     })
-    axios.get(`https://api.github.com/users/${this.state.userInfo.username}/followers`)
-    .then(resp => {
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.userInfo.username !== this.state.userInfo.username) {
+      axios.get(`https://api.github.com/users/${this.state.userInfo.username}/followers`)
+      .then(resp => {
       this.setState({
         ...this.state,
         followers: resp.data
@@ -43,6 +47,7 @@ class App extends React.Component {
       .catch(err => {
         console.log(err)
       })
+    }
   }
 
   render() {
