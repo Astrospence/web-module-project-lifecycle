@@ -1,11 +1,30 @@
 import React from 'react';
 import axios from 'axios';
 import User from './components/User';
+import FollowerList from './components/FollowerList';
 
 class App extends React.Component {
+  constructor() {
+    super() ;
+    this.state = {
+      user: 'Astrospence',
+      userInfo: {
+        name: '',
+        photo: '',
+        username: '',
+        totalRepos: '',
+        totalFollowers: ''
+      },
+      followers: [
+        {
+          photo: '',
+          username: ''
+        }
+      ]
+    }
+  }
 
   render() {
-    console.log('render');
     return(
       <div>
         <h1>GITHUB INFO</h1>
@@ -15,19 +34,11 @@ class App extends React.Component {
           />
           <button>Search</button>
         </form>
-        <div className="userInfo">
-          <img src="" />
-          <h3>Spencer Wood</h3>
-          <p>username</p>
-          <p>total repos</p>
-          <p>total followers</p>
-        </div>
-        <div className="followers">
-          <div className="follower">
-            <img src="" />
-            <p>username</p>
-          </div>
-        </div>
+
+        <User user={this.state.userInfo} />
+
+        <FollowerList followers={this.state.followers} />
+
       </div>
     );
   }

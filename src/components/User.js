@@ -6,8 +6,12 @@ class User extends React.Component {
 
     render() {
         return(
-            <div>
-                
+            <div className="userInfo">
+                <img src={this.props.photo} />
+                <h3>{this.props.name}</h3>
+                <p>{this.props.username}</p>
+                <p>{this.props.totalRepos}</p>
+                <p>{this.props.totalFollowers}</p>
             </div>
         )
     }
