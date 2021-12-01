@@ -59,13 +59,43 @@ class App extends React.Component {
     }
   }
 
+  //input change handler
+  handleInput = (e) => {
+    this.setState({
+      ...this.state,
+      user: e.target.value
+    })
+  }
+
+  //submit handler
+  handleSubmit = (e) => {
+    e.preventDefault();
+    axios.get(`https://api.github.com/users/${this.state.user}`)
+    .then(resp => {
+      this.setState({
+        ...this.state,
+        user: resp.data.login,
+        userInfo: {...this.userInfo, name: resp.data.name,
+                                     photo: resp.data.avatar_url,
+                                     username: resp.data.login,
+                                     totalRepos: resp.data.public_repos,
+                                     totalFollowers: resp.data.followers
+        }
+      })
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+
   render() {
     return(
       <div>
         <h1>GITHUB INFO</h1>
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <input 
             placeholder="enter username"
+            onChange={this.handleInput}
           />
           <button>Search</button>
         </form>
